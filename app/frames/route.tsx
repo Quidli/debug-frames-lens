@@ -25,20 +25,17 @@ const handleRequest = frames(async (ctx) => {
         };
     }
     return {
-        image: (
-            <div tw="flex flex-col">
-                <div tw="flex">Click the button</div>
-            </div>
-        ),
-        buttons: [
-            <Button action="post" target="/who-am-i">
-                Who am I?
-            </Button>,
-            <Button action="tx" target="/tx/approve" post_url="/">
-                Approve
-            </Button>,
-        ],
-    };
+    image: (
+      <div tw="flex flex-col">
+        <div tw="flex">Submit Zero-Value Transaction on Amoy Testnet</div>
+      </div>
+    ),
+    buttons: [
+      <Button action="tx" target="/tx/approve" post_url="/">
+        Submit Tx
+      </Button>,
+    ],
+  };
 });
 
 export const GET = handleRequest;
