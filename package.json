@@ -12,22 +12,23 @@
   },
   "dependencies": {
     "@ethersproject/units": "^5.7.0",
-    "@lens-protocol/client": "^2.0.0",
+    "@lens-protocol/client": "^2.3.1",
     "@types/dompurify": "^3.0.5",
     "@types/jsonwebtoken": "^9.0.6",
     "@vercel/kv": "^1.0.1",
     "@xmtp/frames-validator": "^0.6.1",
+    "@zoralabs/protocol-sdk": "^0.11.1",
     "bignumber.js": "^9.1.2",
     "clsx": "^2.1.0",
     "dompurify": "^3.1.6",
     "ethers": "^6.13.2",
-    "frames.js": "^0.18.1",
+    "frames.js": "^0.19.5",
     "jsonwebtoken": "^9.0.2",
-    "next": "^14.1.4",
+    "next": "^15.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss-animate": "^1.0.7",
-    "viem": "^2.18.2"
+    "viem": "^2.21.9"
   },
   "engines": {
     "node": ">=18.17.0"
