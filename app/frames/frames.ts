@@ -1,33 +1,33 @@
 /* eslint-disable react/jsx-key */
-import { openframes } from "frames.js/middleware";
-import { imagesWorkerMiddleware } from "frames.js/middleware/images-worker";
-import { createFrames } from "frames.js/next";
-import { JsonValue } from "frames.js/types";
+import {openframes} from "frames.js/middleware";
+import {createFrames} from "frames.js/next";
+import {getLensFrameMessage, isLensFrameActionPayload} from "frames.js/lens";
 
 interface MessageWithWalletAddressImplementation {
-  walletAddress: () => Promise<string | undefined>;
+    walletAddress: () => Promise<string | undefined>;
 }
 
 export const frames = createFrames({
-  basePath: "/frames",
-  initialState: {
-    pageIndex: 0,
-  },
-  middleware: [
-    imagesWorkerMiddleware({
-      imagesRoute: "/images",
-    }),
-    openframes({
-      clientProtocol: {
-        id: "anonymous",
-        version: "1.0.0",
-      },
-      handler: {
-        isValidPayload: (body: JsonValue) => true,
-        getFrameMessage: async (body: JsonValue) => {
-          return body as unknown as MessageWithWalletAddressImplementation;
-        },
-      },
-    }),
-  ],
+    basePath: "https://luis2.loclx.io/frames",
+    middleware: [
+        openframes({
+            clientProtocol: {
+                id: "lens",
+                version: "1.0.0",
+            },
+            // clientProtocol: {
+            //     id: "anonymous",
+            //     version: "1.0.0",
+            // },
+            handler: {
+                isValidPayload: (body) => isLensFrameActionPayload(body),
+                getFrameMessage: async (body) => {
+                    if (!isLensFrameActionPayload(body)) {
+                        return body as unknown as MessageWithWalletAddressImplementation;
+                    }
+                    return {...await getLensFrameMessage(body)};
+                },
+            },
+        }),
+    ],
 });
